@@ -9,6 +9,9 @@ RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) 
 # update apt
 RUN apt-get update
 
+# install git
+RUN apt-get -y install git
+
 # install build tools for node-gyp
 RUN apt-get -y install g++ libc-dev build-essential
 
