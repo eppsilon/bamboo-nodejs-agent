@@ -26,6 +26,6 @@ RUN npm config set prefix /usr/local && \
 
 ADD setup.sh /
 
-RUN /setup.sh
+#RUN /setup.sh
 
 ADD bamboo-capabilities.properties /root/bamboo-agent-home/bin/bamboo-capabilities.properties
