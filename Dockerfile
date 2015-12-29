@@ -24,6 +24,10 @@ RUN apt-get -y install ruby1.9.1
 # install python
 RUN apt-get -y install python2.7
 
+# set python 2.7 as the default version
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python2.7 2 && \
+  update-alternatives --install /usr/bin/python python /usr/bin/python3.4 1
+
 # install node from source
 RUN \
   cd /opt && \
@@ -41,7 +45,11 @@ RUN npm config set prefix /usr/local && npm install -g npm
 RUN npm install -g gulp bower coffeelint eslint
 
 # install phantomjs
-RUN npm install -g phantomjs@1.9.19
+ADD phantomjs-1.9.8-linux-x86_64.tar.bz2 /opt/phantomjs
+RUN mv /opt/phantomjs/phantomjs-1.9.8-linux-x86_64/* /opt/phantomjs && \
+  rm -rf /opt/phantomjs/phantomjs-1.9.8-linux-x86_64 && \
+  cd /usr/local/bin && \
+  ln -s /opt/phantomjs/bin/phantomjs phantomjs
 
 # install common ruby packages
 RUN gem install sass scss_lint
