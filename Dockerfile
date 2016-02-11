@@ -39,7 +39,11 @@ RUN \
   rm -f /opt/node-v4.3.0-linux-x64.tar.gz
 
 # configure/update npm
-RUN npm config set prefix /usr/local && npm install -g npm
+# NOTE: changing registry to HTTP avoids ECONNRESET errors?
+#       https://github.com/npm/npm/issues/9418
+RUN npm config set registry http://registry.npmjs.org/ && \
+  npm config set prefix /usr/local && \
+  npm install -g npm
 
 # install common node packages
 RUN npm install -g gulp bower coffeelint eslint
