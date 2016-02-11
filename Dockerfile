@@ -31,12 +31,12 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python2.7 2 &&
 # install node from source
 RUN \
   cd /opt && \
-  wget http://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz && \
-  tar -xzf node-v4.2.4-linux-x64.tar.gz && \
-  mv node-v4.2.4-linux-x64 node && \
+  wget http://nodejs.org/dist/v4.3.0/node-v4.3.0-linux-x64.tar.gz && \
+  tar -xzf node-v4.3.0-linux-x64.tar.gz && \
+  mv node-v4.3.0-linux-x64 node && \
   cd /usr/local/bin && \
   ln -s /opt/node/bin/* . && \
-  rm -f /opt/node-v4.2.4-linux-x64.tar.gz
+  rm -f /opt/node-v4.3.0-linux-x64.tar.gz
 
 # configure/update npm
 RUN npm config set prefix /usr/local && npm install -g npm
@@ -45,9 +45,9 @@ RUN npm config set prefix /usr/local && npm install -g npm
 RUN npm install -g gulp bower coffeelint eslint
 
 # install phantomjs
-ADD phantomjs-1.9.8-linux-x86_64.tar.bz2 /opt/phantomjs
-RUN mv /opt/phantomjs/phantomjs-1.9.8-linux-x86_64/* /opt/phantomjs && \
-  rm -rf /opt/phantomjs/phantomjs-1.9.8-linux-x86_64 && \
+ADD phantomjs-2.1.1-linux-x86_64.tar.bz2 /opt/phantomjs
+RUN mv /opt/phantomjs/phantomjs-2.1.1-linux-x86_64/* /opt/phantomjs && \
+  rm -rf /opt/phantomjs/phantomjs-2.1.1-linux-x86_64 && \
   cd /usr/local/bin && \
   ln -s /opt/phantomjs/bin/phantomjs phantomjs
 
